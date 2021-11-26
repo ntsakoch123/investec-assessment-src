@@ -1,0 +1,19 @@
+spring:
+  application.name: api-gateway
+  profiles.active: dev
+
+server:
+  port: 8002
+  servlet.context-path: /
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    serviceUrl.defaultZone: http://localhost:8001/eureka/
+
+logging:
+  level:
+    za.co.investec: DEBUG
+  file:
+    name: api-gateway.log

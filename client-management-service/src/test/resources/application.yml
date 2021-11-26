@@ -1,0 +1,14 @@
+spring:
+  application.name: client-management-service
+  jackson.default-property-inclusion: non_null
+  datasource:
+    url: jdbc:h2:mem:clientsdb
+    username: sa
+    password: password
+    driverClassName: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.H2Dialect
+  main:
+    allow-bean-definition-overriding: true

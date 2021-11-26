@@ -1,0 +1,221 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8091",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/clients/search/v1": {
+      "get": {
+        "tags": [
+            "search-client-controller"
+        ],
+        "operationId": "searchClient",
+        "parameters": [
+          {
+            "name": "firstName",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "mobileNumber",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "idNumber",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ClientModel"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/clients/v1": {
+      "put": {
+        "tags": [
+            "update-client-controller"
+        ],
+        "operationId": "updateClient",
+        "parameters": [
+          {
+            "name": "clientId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "default response"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+            "create-client-controller"
+        ],
+        "operationId": "createClient",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "default response"
+          }
+        }
+      }
+    },
+    "/clients/{clientId}/v1": {
+      "get": {
+        "tags": [
+            "search-client-controller"
+        ],
+        "operationId": "findClient",
+        "parameters": [
+          {
+            "name": "clientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default response",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ClientAddressModel": {
+        "required": [
+            "houseNumber",
+            "postalCode",
+            "streetName",
+            "suburb"
+        ],
+        "type": "object",
+        "properties": {
+          "streetName": {
+            "maxLength": 100,
+            "minLength": 2,
+            "type": "string"
+          },
+          "houseNumber": {
+            "minimum": 1,
+            "type": "integer",
+            "format": "int64"
+          },
+          "suburb": {
+            "maxLength": 100,
+            "minLength": 3,
+            "type": "string"
+          },
+          "postalCode": {
+            "maximum": 9999,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int64"
+          },
+          "removed": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ClientModel": {
+        "required": [
+            "firstName",
+            "idNumber",
+            "lastName"
+        ],
+        "type": "object",
+        "properties": {
+          "clientId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "idNumber": {
+            "type": "string"
+          },
+          "firstName": {
+            "maxLength": 100,
+            "minLength": 2,
+            "type": "string"
+          },
+          "lastName": {
+            "maxLength": 100,
+            "minLength": 2,
+            "type": "string"
+          },
+          "mobileNumber": {
+            "pattern": "^(0\\d{9})?$",
+            "type": "string"
+          },
+          "physicalAddress": {
+            "$ref": "#/components/schemas/ClientAddressModel"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+spring:
+  application.name: idnumber-verification-service
+  profiles.active: dev
+  jackson:
+    default-property-inclusion: non_null
+
+server:
+  port: 8092
+  servlet.context-path: /
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    serviceUrl.defaultZone: http://localhost:8001/eureka/
+
+logging:
+  level:
+    za.co.investec: DEBUG
+  file:
+    name: idnumber-verification-service.log
+
+idnumber-validation-api-url: https://bdupreez-south-african-id-no-validator-v1.p.rapidapi.com/
+x-rapidapi-host: bdupreez-south-african-id-no-validator-v1.p.rapidapi.com
+x-rapidapi-key: 318e5cbeffmsh998bc9c08aad86bp130b9fjsn9b07e8f9a245

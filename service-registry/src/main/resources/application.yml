@@ -1,0 +1,17 @@
+spring:
+  application.name: service-registry
+  profiles.active: dev
+server:
+  port: 8001
+  servlet.context-path: /
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+
+logging:
+  level:
+    za.co.investec: DEBUG
+  file:
+    name: service-registry.log
